@@ -17,6 +17,13 @@ public class Edge {
 		this.horizontal = horizontal;
 		this.colorOfEdge = ColorTeam.BLANK;
 	}
+	
+	public Edge(Edge edge) {
+		this.x = edge.getX();
+		this.y = edge.getY();
+		this.horizontal = edge.isHorizontal();
+		this.colorOfEdge = edge.getColorOfEdge();
+	}
 
 	public boolean isHorizontal() {
 		return horizontal;
@@ -42,5 +49,7 @@ public class Edge {
 	public void setColorOfEdge(int colorOfEdge) {
 		this.colorOfEdge = colorOfEdge;
 	}
+	
+	
 
 }

@@ -7,6 +7,23 @@ public class Box {
 	private Edge vLEdge;
 	private int trangthai;
 
+	public Box(Edge hTEdge, Edge hDEdge, Edge vREdge, Edge vLEdge, int trangthai) {
+		super();		
+		this.hTEdge = hTEdge;
+		this.hDEdge = hDEdge;
+		this.vREdge = vREdge;
+		this.vLEdge = vLEdge;
+		this.trangthai = trangthai;
+	}
+	
+	public Box(Box box) {
+		this.hDEdge = box.gethDEdge();
+		this.hTEdge = box.gethTEdge();
+		this.vLEdge = box.getvLEdge();
+		this.vREdge = box.getvREdge();
+		this.trangthai = box.getTrangthai();
+	}
+
 	public Edge gethTEdge() {
 		return hTEdge;
 	}
@@ -66,5 +83,10 @@ public class Box {
 		if(vLEdge.getColorOfEdge() == ColorTeam.BLACK) count++;
 		return count;
 	}
+	
+//	public void setEdge(int color) {
+//		
+//		
+//	}
 
 }

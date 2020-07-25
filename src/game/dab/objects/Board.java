@@ -54,28 +54,84 @@ public class Board implements Cloneable {
 		redScore = blueScore = 0;
 	}
 
+	public void setRedScore(int redScore) {
+		this.redScore = redScore;
+	}
+
+	public void setBlueScore(int blueScore) {
+		this.blueScore = blueScore;
+	}
+
 	public Board clone() {
-		Board cloned = new Board(n);
+		Board cloned = new Board(this.n);
 
+//		for (int i = 0; i < (n - 1); i++) {
+//			Edge h = new Edge();
+//			h = hEdges.get(i);
+//			cloned.hEdges.add(h);
+//		}
+//
+//		for (int i = 0; i < n; i++) {
+//			Edge v = new Edge();
+//			v = vEdges.get(i);
+//			cloned.vEdges.add(v);
+//		}
+//		for (Box box3 : box) {
+//			Box b = new Box();
+//			b = box3;
+//			cloned.box.add(b);
+//		}
+		cloned.clear();
+		
+		for(Edge hedge: hEdges) {
+			cloned.hEdges.add(new Edge(hedge));
+			
+		}
+		
+		for(Edge vedge: vEdges) {
+			cloned.vEdges.add(new Edge(vedge));
+		}
+		
+		int count = 0;
+		
+		for (int i = 0; i < (n - 1) * (n - 1); i++) {
+			cloned.box.add(new Box());
+		}
+		
 		for (int i = 0; i < (n - 1); i++) {
-			Edge h = new Edge();
-			h = hEdges.get(i);
-			cloned.hEdges.add(h);
-		}
+			for (int j = 0; j < n; j++) {
+				count++;
+				if (j == 0) {
+					cloned.box.get(i).sethTEdge(cloned.hEdges.get(count - 1));
+				} else if (j < n - 1) {
+					cloned.box.get(i + (j - 1) * (n - 1)).sethDEdge(cloned.hEdges.get(count - 1));
+					cloned.box.get(i + j * (n - 1)).sethTEdge(cloned.hEdges.get(count - 1));
+				} else {
+					cloned.box.get(i + (j - 1) * (n - 1)).sethDEdge(cloned.hEdges.get(count - 1));
+				}
 
+			}
+		}
+		
+		count = 0;
 		for (int i = 0; i < n; i++) {
-			Edge v = new Edge();
-			v = vEdges.get(i);
-			cloned.vEdges.add(v);
-		}
-		for (Box box3 : box) {
-			Box b = new Box();
-			b = box3;
-			cloned.box.add(b);
+			for (int j = 0; j < (n - 1); j++) {
+				count++;
+				if (i == 0)
+					cloned.box.get(j * (n - 1)).setvLEdge(cloned.vEdges.get(count - 1));
+				else if (i < (n - 1)) {
+					cloned.box.get(i - 1 + j * (n - 1)).setvREdge(cloned.vEdges.get(count - 1));
+					cloned.box.get(i + j * (n - 1)).setvLEdge(cloned.vEdges.get(count - 1));
+				} else {
+					cloned.box.get(i - 1 + j * (n - 1)).setvREdge(cloned.vEdges.get(count - 1));
+				}
+			}
 		}
 
-		cloned.redScore = redScore;
-		cloned.blueScore = blueScore;
+		cloned.setRedScore(this.redScore);
+		cloned.setBlueScore(this.blueScore);
+		
+		
 
 		return cloned;
 	}
@@ -117,6 +173,41 @@ public class Board implements Cloneable {
 		return ret;
 	}
 
+//	 public ArrayList<Point> setHEdge(int x, int y, int color) {
+//	        hEdge[x][y]=BLACK;
+//	        ArrayList<Point> ret = new ArrayList<Point>();
+//	        if(y<(n-1) && vEdge[x][y]==BLACK && vEdge[x+1][y]==BLACK && hEdge[x][y+1]==BLACK) {
+//	            box[x][y]=color;
+//	            ret.add(new Point(x,y));
+//	            if(color == RED) redScore++;
+//	            else blueScore++;
+//	        }
+//	        if(y>0 && vEdge[x][y-1]==BLACK && vEdge[x+1][y-1]==BLACK && hEdge[x][y-1]==BLACK) {
+//	            box[x][y-1]=color;
+//	            ret.add(new Point(x,y-1));
+//	            if(color == RED) redScore++;
+//	            else blueScore++;
+//	        }
+//	        return ret;
+//	    }
+//
+//	    public ArrayList<Point> setVEdge(int x, int y, int color) {
+//	        vEdge[x][y]=BLACK;
+//	        ArrayList<Point> ret = new ArrayList<Point>();
+//	        if(x<(n-1) && hEdge[x][y]==BLACK && hEdge[x][y+1]==BLACK && vEdge[x+1][y]==BLACK) {
+//	            box[x][y]=color;
+//	            ret.add(new Point(x,y));
+//	            if(color == RED) redScore++;
+//	            else blueScore++;
+//	        }
+//	        if(x>0 && hEdge[x-1][y]==BLACK && hEdge[x-1][y+1]==BLACK && vEdge[x-1][y]==BLACK) {
+//	            box[x-1][y]=color;
+//	            ret.add(new Point(x-1,y));
+//	            if(color == RED) redScore++;
+//	            else blueScore++;
+//	        }
+//	        return ret;
+//	    }
 
 	public ArrayList<Point> setHEdge(int x, int y, int color) {
 		int numb = x + y * (n - 1);
@@ -188,7 +279,7 @@ public class Board implements Cloneable {
 
 	public int getBoxCount(int nSides) {
 		int count = 0;
-		for (Box box: box) {
+		for (Box box: this.box) {
 			if (box.countEdgeBlack() == nSides)
 				count++;
 		}

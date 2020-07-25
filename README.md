@@ -1,17 +1,29 @@
-# Dots and boxes
+# README #
 
-This project is dots and boxes game. This game was written in Java.
+This README would normally document whatever steps are necessary to get your application up and running.
 
-## Require
+### What is this repository for? ###
 
-Install Eclipse then use market to install Java swing:
+* Quick summary
+* Version
+* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
-```bash
-https://www.formdev.com/jformdesigner/installation/#install_eclipse
-```
+### How do I get set up? ###
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+* Summary of set up
+* Configuration
+* Dependencies
+* Database configuration
+* How to run tests
+* Deployment instructions
 
-Please make sure to update tests as appropriate.
+### Contribution guidelines ###
 
+* Writing tests
+* Code review
+* Other guidelines
+
+### Who do I talk to? ###
+
+* Repo owner or admin
+* Other community or team contact

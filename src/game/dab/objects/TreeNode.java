@@ -38,7 +38,9 @@ public class TreeNode {
     }
 
     public void setEdge(Edge edge) {
-        this.edge = edge ;
+    	Edge tempEdge;
+    	tempEdge = new Edge(edge.getX(),edge.getY(),edge.isHorizontal());
+        this.edge = tempEdge;
     }
 
 }

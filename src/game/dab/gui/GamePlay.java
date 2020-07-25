@@ -157,6 +157,7 @@ public class GamePlay {
 				statusLabel.setForeground(Color.RED);
 			}
 		}
+		
 
 	}
 
